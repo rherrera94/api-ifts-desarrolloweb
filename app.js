@@ -61,6 +61,7 @@ const routeEmpleado= require('./routes/rutasEmpleado');
 /***
  * RUTAS:
  * userinterno: ruta de usuarios con alta, login,baja.
+ * empleado: modulo para la creacion y visualizacion de los empleados de la empresa
  */
 
 app.use('/userinterno',routeUserInterno);
