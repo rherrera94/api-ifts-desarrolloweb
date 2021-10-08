@@ -58,10 +58,10 @@ app.post('/',async(req,res)=>{
  */
 app.post('/login', async(req,res)=>{
 	try{
-	    if(!req.body.usuario || !req.body.contrasenia){
+	    if(!req.body.nombreUsuario || !req.body.contrasenia){
 		    throw new Error ("Revise los datos ingresados");
 	    }
-        let respuesta=await servicios.getUser(req.body.usuario.toUpperCase());
+        let respuesta=await servicios.getUser(req.body.nombreUsuario.toUpperCase());
         if (respuesta.length==0){
             throw new Error ('Usuario o contraseña incorrectos');
         }
