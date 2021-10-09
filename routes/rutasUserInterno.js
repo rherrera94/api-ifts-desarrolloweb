@@ -82,7 +82,17 @@ app.post('/login', async(req,res)=>{
 	   const token= jwt.sign(tokenData, SECRET_WORD,{
 		expiresIn: 60*60*2 // expira en 2hs
 	   });
-       let permisos=await servicios.getPermisos(respuesta[0].idRol)
+       let permisos=await servicios.getPermisos(respuesta[0].idRol);
+       var consulta=false;
+       for (let j=0;j<permisos.length;j++){
+           console.log(permisos[j].id)
+           if(permisos[j].id==="PERMIT_LOGIN"){
+                consulta=true;
+           }
+       }
+       if(!consulta){
+           throw new Error("No tiene permitido el login")
+       }
        //armo la parte del rol donde tendre que id de rol es y ademas los permisos que tiene el rol
        let rol={
            "id":respuesta[0].idRol,
@@ -99,7 +109,8 @@ app.post('/login', async(req,res)=>{
 	   res.send({"data":jsonrta,"token":token});					
 	}
 	catch(e){
-        if(e.message!="Revise los datos ingresados" && e.message!='Usuario o contraseña incorrectos' && e.message!="Usuario inhabilitado consulte con el administrador"){
+        if(e.message!="Revise los datos ingresados" && e.message!='Usuario o contraseña incorrectos' && 
+        e.message!="Usuario inhabilitado consulte con el administrador" && e.message!="No tiene permitido el login"){
             res.status(404).json({"error":"Error inesperado"})
             return;
         }
@@ -127,7 +138,6 @@ app.post('/login', async(req,res)=>{
         res.json(respuesta)					
 	}
 	catch(e){
-        console.log(e)
         if(e.message!="Revise los datos ingresados" && e.message!='Rol de usuario no encontrado'){
             res.status(404).json({"error":"Error inesperado"})
             return;
