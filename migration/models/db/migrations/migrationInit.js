@@ -16,6 +16,7 @@ const bcrypt= require('bcrypt');
                 table.string('apellido',50).notNullable();
                 table.string('nombre',50).notNullable();
                 table.string('mail',100).notNullable();
+                table.date('nacimiento').notNullable();
                 table.string('cargo',50).notNullable();
                 table.integer('eliminado').defaultTo(null);
             })
@@ -99,11 +100,13 @@ const bcrypt= require('bcrypt');
             const nombre="JUAN";
             const mail="ADMIN@DALW.COM.AR";
             const cargo="JEFE AREA SISTEMAS"
+            const nacimiento="1990/04/23"
             await db("empleado").insert({
                 cuil,
                 apellido,
                 nombre,
                 mail,
+                nacimiento,
                 cargo
             })
         })
