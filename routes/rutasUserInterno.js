@@ -85,7 +85,6 @@ app.post('/login', async(req,res)=>{
        let permisos=await servicios.getPermisos(respuesta[0].idRol);
        var consulta=false;
        for (let j=0;j<permisos.length;j++){
-           console.log(permisos[j].id)
            if(permisos[j].id==="PERMIT_LOGIN"){
                 consulta=true;
            }
