@@ -17,7 +17,7 @@ app.post('/',async(req,res)=>{
         !req.body.usuario||!isNaN(req.body.usuario)||req.body.usuario.trim()==""||
         !req.body.contrasenia||!isNaN(req.body.contrasenia)||req.body.contrasenia.trim()==""||
         !req.body.email||!isNaN(req.body.email)||req.body.email.trim()==""||
-        !req.body.rol||isNaN(req.body.rol)){
+        !req.body.rol||!isNaN(req.body.rol)){
             throw new Error("Revise la información ingresada");
         }
         //me fijo si el nombre de usuario ya se encuentra registrado
@@ -30,22 +30,26 @@ app.post('/',async(req,res)=>{
         if (empleado.length==0){
             throw new Error("El numero de cuil ingresado no se corresponde con empleado registrado");
         }
+        let rol=await servicios.getRol(req.body.rol);
+        if (rol.length==0){
+            throw new Error("Rol incorrecto")
+        }
         //Si está todo bien, debemos encriptar la clave
 		const claveEncriptada= await bcrypt.hash(req.body.contrasenia,10);
         //por el momento y hasta que se implemente rutasRol se toma como que el id de rol me lo pasa el front
         let usuarioReg={
             "nombre":req.body.usuario.toUpperCase(),
             "contrasenia":claveEncriptada,
-            "idRol":req.body.rol,
+            "idRol":rol[0].id,
             "idEmpleado":empleado[0].id,
             "mail":req.body.email.toUpperCase()
         }
         await servicios.createUser(usuarioReg);
         res.json(usuarioReg);
     }catch(e){
-
+        console.log(e.message)
         if(e.message!="Revise la información ingresada" && e.message!="El nombre de usuario ya se encuentra registrado"
-        && e.message!="El numero de cuil ingresado no se corresponde con empleado registrado"){
+        && e.message!="El numero de cuil ingresado no se corresponde con empleado registrado" && e.message!="Rol incorrecto"){
             res.status(404).json({"error":"Error inesperado"})
             return;
         }

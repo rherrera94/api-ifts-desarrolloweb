@@ -27,8 +27,8 @@ class UserInterno{
 	}
 	/**
 	 * Devuelve el rol de usuario por el cual se consulta
-	 * @param {Number} rol id de rol al cual se necesita asignarle permisos
-	 * @returns {Array} devuelve un array con la informacion encontrada 
+	 * @param {String} rol rol que se necesita
+	 * @returns {Array} devuelve el id del rol solicitado 
 	 */
 	 async getRol(rol){
 		const rolSolicitado= await userModel.getRol(rol);
