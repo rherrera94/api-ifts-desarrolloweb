@@ -47,7 +47,6 @@ app.post('/',async(req,res)=>{
         await servicios.createUser(usuarioReg);
         res.json(usuarioReg);
     }catch(e){
-        console.log(e.message)
         if(e.message!="Revise la información ingresada" && e.message!="El nombre de usuario ya se encuentra registrado"
         && e.message!="El numero de cuil ingresado no se corresponde con empleado registrado" && e.message!="Rol incorrecto"){
             res.status(404).json({"error":"Error inesperado"})
