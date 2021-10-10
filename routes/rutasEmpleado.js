@@ -11,7 +11,7 @@ app.post('/',async(req,res)=>{
         if(!req.body.cuil||!isNaN(req.body.cuil)||req.body.cuil.trim()==""||!req.body.apellido||!isNaN(req.body.apellido)
         ||req.body.apellido.trim()==""|| !req.body.nombre||!isNaN(req.body.nombre)||req.body.nombre.trim()==""||
         !req.body.mail||!isNaN(req.body.mail)||req.body.mail.trim()==""||!req.body.cargo||!isNaN(req.body.cargo)||
-        req.body.cargo.trim()==""){
+        req.body.cargo.trim()==""||req.body.nacimiento==""){
             throw new Error("Revise la información ingresada");
         }
         //me fijo si el empleado ya se encuentra registrado
@@ -25,6 +25,7 @@ app.post('/',async(req,res)=>{
             "apellido":req.body.apellido.toUpperCase(),
             "nombre":req.body.nombre.toUpperCase(),
             "mail":req.body.mail.toUpperCase(),
+            "nacimiento":req.body.nacimiento,
             "cargo":req.body.cargo.toUpperCase()
         }
         await servicios.empleadoIngreso (empleadoReg);

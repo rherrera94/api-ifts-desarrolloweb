@@ -6,8 +6,8 @@ const qy=require('../../config/conexion');
  * @param {Object} empleado empleado a ingresar
  */
  async function empleadoIngreso (empleado){
-    let query='INSERT INTO empleado (cuil,apellido,nombre,mail,idOrganismo,cargo) values (?,?,?,?,?,?)';
-    await qy (query,[empleado.cuil,empleado.apellido,empleado.nombre,empleado.mail,empleado.idOrganismo,empleado.cargo]);
+    let query='INSERT INTO empleado (cuil,apellido,nombre,mail,nacimiento,cargo) values (?,?,?,?,?,?)';
+    await qy (query,[empleado.cuil,empleado.apellido,empleado.nombre,empleado.mail,empleado.nacimiento,empleado.cargo]);
 }
 
 /**
@@ -17,7 +17,7 @@ const qy=require('../../config/conexion');
  * @returns {JSON} Devuelve un JSON con la respuesta de la tabla empleado.
  */
 async function empleadosList(){
-    let registros=await qy ('SELECT empleado.*, organismo.denominacion as organismo  FROM empleado, organismo where empleado.idOrganismo=organismo.id');
+    let registros=await qy ('SELECT *  FROM empleado');
     return registros;
 }
 /**
