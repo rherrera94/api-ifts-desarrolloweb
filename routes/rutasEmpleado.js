@@ -112,6 +112,48 @@ app.get('/cuil/:cuil',async (req,res)=>{
         res.status(404).send({"Mensaje": error.message});
     }
 })
+/**
+ * deshabilita empleado que tiene cuil igual al  que se pasa por parámetro.
+ * Devuelve el registro con el campo eliminado en 1.
+ * @returns {JSON} json
+ */
+ app.put('/borrado/:cuil', async (req,res)=>{
+    try{
+        if (!isNaN(req.params.cuil) || req.params.cuil.replace(/ /g, "")==""||req.params.cuil.replace(/ /g, "")!=req.params.cuil){
+            throw new Error ("Chequee la información ingresada")
+        }
+        await servicios.empleadoBorrado(req.params.cuil)
+        res.status(200).send(req.params.cuil);
+
+    } catch (error) {
+        if (error.message!="Chequee la información ingresada"){
+            res.status(400).send({"Mensaje": "error inesperado"});
+            return;
+        }
+        res.status(404).send({"Mensaje": error.message});
+    }
+});
+/**
+ * rehabilita usuario que tiene cuil igual al  que se pasa por parámetro.
+ * Devuelve el registro con el campo eliminado en NULL.
+ * @returns {JSON} json
+ */
+ app.put('/rehabilitar/:cuil', async (req,res)=>{
+    try{
+        if (!isNaN(req.params.cuil) || req.params.cuil.replace(/ /g, "")==""||req.params.cuil.replace(/ /g, "")!=req.params.cuil){
+            throw new Error ("Chequee la información ingresada")
+        }
+        await servicios.empleadoRehabilitar(req.params.cuil)
+        res.status(200).send(req.params.cuil);
+
+    } catch (error) {
+        if (error.message!="Chequee la información ingresada"){
+            res.status(400).send({"Mensaje": "error inesperado"});
+            return;
+        }
+        res.status(404).send({"Mensaje": error.message});
+    }
+});
 
 /*******************************************************************************/
 

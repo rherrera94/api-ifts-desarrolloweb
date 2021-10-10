@@ -30,10 +30,23 @@ async function empleadoGetter (id){
 async function cuilGetter (cuil){
     return await model.cuilGet(cuil);
 }
-
+/**
+ * coloca el dato eliminado en 1.
+	 */
+async function empleadoBorrado(empleado){
+    return model.empleadoBorrado(empleado);
+}
+/**
+ * coloca el dato eliminado en NULL.
+ */
+ async function empleadoRehabilitar(empleado){
+    return model.empleadoRehabilitar(empleado);
+}
 module.exports={
     empleadoIngreso,
     empleadoGetter,
     empleadosListado,
-    cuilGetter
+    cuilGetter,
+    empleadoBorrado,
+    empleadoRehabilitar
 }
