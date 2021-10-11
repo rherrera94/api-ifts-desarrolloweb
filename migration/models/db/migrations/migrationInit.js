@@ -8,8 +8,6 @@ const bcrypt= require('bcrypt');
         console.log("*Se inicia proceso inicial de creación tablas de BBDD*");
         console.log("******************************************************");
         console.log("******************************************************");
-        
-
             await db.schema.createTable('empleado',table =>{
                 table.increments('id');
                 table.string('cuil',16).notNullable();
@@ -52,6 +50,14 @@ const bcrypt= require('bcrypt');
             })
         })
         .then(()=>console.log("Tabla usuariointerno creada"))
+        .then(async ()=>{
+            await db.schema.createTable('capacitacion',table =>{
+                table.increments('id');
+                table.string('curso',50).notNullable();
+                table.date("fechainicio").notNullable();
+            })
+        })
+        .then(()=>console.log("Tabla capacitacion creada"))
         .then(()=>{
             console.log("*****************************************************");
             console.log("*****************************************************");
