@@ -79,5 +79,11 @@ class UserInterno{
 	 async usuarioRehabilitar(usuario){
 		return userModel.usuarioRehabilitar(usuario);
 	}
+	/**
+	 * Cambia contraseña.
+	 */
+	 async usuarioCambioContra(usuario){
+		return userModel.usuarioCambioContra(usuario);
+	}
 }
 module.exports=new UserInterno;
