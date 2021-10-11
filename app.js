@@ -56,16 +56,19 @@ app.use(
 
 const routeUserInterno=require('./routes/rutasUserInterno');
 const routeEmpleado= require('./routes/rutasEmpleado');
+const routeCapacitacion= require('./routes/rutasCapacitacion');
 
 /*************************************************************************/
 /***
  * RUTAS:
  * userinterno: ruta de usuarios con alta, login,baja.
  * empleado: modulo para la creacion y visualizacion de los empleados de la empresa
+ * capacitacion: modulo para la creacion y visualizacion de las capacitaciones de la empresa
  */
 
 app.use('/userinterno',routeUserInterno);
 app.use('/empleado',routeEmpleado);
+app.use('/capacitacion',routeCapacitacion);
 
 /*************************************************************************/
 app.use((req, res) => {
