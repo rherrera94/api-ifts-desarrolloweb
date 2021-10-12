@@ -11,7 +11,19 @@ async function capacitacionNew (capacitacion){
 async function capacitacionGet(){
     return model.capacitacionGet();
 }
+async function capacitacionGett(){
+    return model.capacitacionGett();
+}
+async function capacitacionBorrar(id){
+    await model.capacitacionBorrar(id);
+}
+async function capacitacionRehabilitar(id){
+    await model.capacitacionRehabilitar(id);
+}
 module.exports={
     capacitacionNew,
-    capacitacionGet
+    capacitacionGet,
+    capacitacionBorrar,
+    capacitacionRehabilitar,
+    capacitacionGett
 }

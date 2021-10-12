@@ -13,11 +13,27 @@ async function capacitacionNew (capacitacion){
     }    
 }
 async function capacitacionGet(){
+    query='SELECT * FROM capacitacion where eliminada is null';
+    let resultado = await qy (query);
+    return resultado;
+}
+async function capacitacionGett(){
     query='SELECT * FROM capacitacion';
     let resultado = await qy (query);
     return resultado;
 }
+async function capacitacionBorrar(id){
+    let query= "UPDATE capacitacion SET eliminada=? where id=?"
+    await qy(query,[1,id]);
+}
+async function capacitacionRehabilitar(id){
+    let query= "UPDATE capacitacion SET eliminada=? where id=?"
+    await qy(query,[null,id]);
+}
 module.exports={
     capacitacionNew,
-    capacitacionGet
+    capacitacionGet,
+    capacitacionBorrar,
+    capacitacionRehabilitar,
+    capacitacionGett
 }
